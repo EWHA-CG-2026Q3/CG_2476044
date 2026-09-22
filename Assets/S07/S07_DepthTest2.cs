@@ -44,12 +44,11 @@ public class S07_DepthTest2 : MonoBehaviour
         for (int x = 0; x < canvasWidth; x++)
             for (int y = 0; y < canvasHeight; y++)
                 depthBuffer[x, y] = float.MaxValue;
-
-        // TODO 0: 아래 세 줄의 순서를 원하는 대로 바꿔보세요.
+        
+        DrawTriangle(vertexA3, vertexB3, vertexC3, color3);
         DrawTriangle(vertexA1, vertexB1, vertexC1, color1);
         DrawTriangle(vertexA2, vertexB2, vertexC2, color2);
-        DrawTriangle(vertexA3, vertexB3, vertexC3, color3);
-
+        
         canvasTexture.Apply();
         targetImage.texture = canvasTexture;
     }
