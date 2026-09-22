@@ -94,15 +94,29 @@ public class S07_Clipping : MonoBehaviour
         }
         return output;
     }
-
-    // ── TODO: ClipLeft를 참고해서 오른쪽 경계(x <= boundary)로 자르는 함수를 완성하세요 ──
-    // 지금은 "통과만 시키는" 상태 — 완성하기 전까지는 이 단계에서 아무것도 안 잘림
+    
     private List<Vector2> ClipRight(List<Vector2> input, float boundary)
     {
-        return input;
+        
+        List<Vector2> output = new List<Vector2>();
+        for (int i = 0; i < input.Count; i++)
+        {
+            Vector2 current = input[i];
+            Vector2 previous = input[(i - 1 + input.Count) % input.Count];
+            bool currentInside = current.x <= boundary;
+            bool previousInside = previous.x <= boundary;
 
-        // TODO: 위의 return input; 을 지우고, ClipLeft와 같은 구조로
-        // "안쪽"의 정의만 반대(x <= boundary)로 바꿔서 작성하세요.
+            if (currentInside)
+            {
+                if (!previousInside) output.Add(GetIntersectionX(previous, current, boundary));
+                output.Add(current);
+            }
+            else if (previousInside)
+            {
+                output.Add(GetIntersectionX(previous, current, boundary));
+            }
+        }
+        return output;
     }
 
     // ── TODO: 아래쪽 경계(y >= boundary)로 자르는 함수를 완성하세요 ──
