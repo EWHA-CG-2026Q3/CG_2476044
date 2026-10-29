@@ -28,6 +28,8 @@ Shader "CG/S17_MyTexture"
             {
                 float2 p = uv;
 
+                p = uv * 0.25 + float2(0.25, 0.5);
+
                 return tex2D(_BaseMap, p);
             }
             ENDHLSL
